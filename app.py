@@ -14,4 +14,22 @@ class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(JSONB)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.json
+    model_data = Model(data=data)
+    db.session.add(model_data)
+    db.session.commit()
+    return jsonify(success=True)
+
+@app.route('/data')
+def data():
+    all_data = Model.query.all()
+    return jsonify(data=[d.data for d in all_data])
+
+if __name__ == '__main__':
+    app.run(debug=True)
