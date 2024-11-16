@@ -12,6 +12,13 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 ```
+#### Скачивание и запуска сервера Postgres 
+```
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
 #### Создания и настройка пользователя в БД
 ```
 sudo -u postgres psql
